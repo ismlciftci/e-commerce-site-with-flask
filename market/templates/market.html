@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Market Sayfası
+{% endblock %}
+{% block content %}
+<div class="row" style="margin-top:20px; margin-left:20px">
+   <div class="col-8">
+       <h2>Satın alabileceğiniz ürünler</h2>
+       <p>Satın almak için bir ürüne basın</p>
+       <br>
+      <table class="table table-hover table-dark">
+         <thead>
+            <tr>
+               <!-- Your Columns HERE -->
+               <th scope="col">ID</th>
+               <th scope="col">Ürünler</th>
+               <th scope="col">Barcode</th>
+               <th scope="col">Fiyat</th>
+               <th scope="col">Seçenekler</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in items %}
+            {% include 'includes/items_modals.html' %}
+            <tr>
+               <td>{{ item.id }}</td>
+               <td>{{ item.name }}</td>
+               <td>{{ item.barcode }}</td>
+               <td>{{ item.price }}$</td>
+               <td>
+                  <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">Detaylı Bilgi</button>
+                  <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{ item.id }}">Satın Al</button></td>
+            </tr>
+            {% endfor%}
+         </tbody>
+      </table>
+   </div>
+   <div class="col-4">
+       <h2>Satın aldığınız ürünler</h2>
+       <p>Ürünü iptal etmek için tıklayın</p>
+       <br>
+      <div class="row">
+         {% for owned_item in owned_items %}
+         {% include 'includes/owned_items_modals.html' %}
+            <div class="col-md-6">
+                  <div style="margin-bottom: 5px" class="card text-center bg-dark">
+                     <div class="card-body">
+                        <h5 class="card-title">{{ owned_item.name }}</h5>
+                        <button type="button" class="btn btn-outline-danger" style="margin-bottom: 5px" data-toggle="modal" data-target="#Modal-SellingConfirm-{{ owned_item.id }}">
+                        Bu Ürünü Sat
+         </button>
+         <p class="card-text"><strong>Bu ürünün değeri {{ owned_item.price }}$</strong></p>
+            </div>
+                  </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</div>
+{% endblock %}

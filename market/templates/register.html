@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+Kayıt Sayfası
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+<div class="container" >
+
+    <form method="post" class="form-register" style="color:white">
+            {{ form.hidden_tag() }}
+            <img class="mb-4"  src="https://staging.thriveablebiz.com/wp-content/uploads/2021/06/shop.png" width="200" height="200" alt="">
+            <h1 class="h3 mb-3 font-weight-normal">
+Hesap oluştur           </h1>
+
+
+        {{ form.username.label() }}
+        {{ form.username(class="form-control", placeholder="Kullanıcı Adı Giriniz") }}
+
+        {{ form.email_address.label() }}
+        {{ form.email_address(class="form-control", placeholder="Email Adresi") }}
+
+        {{ form.password1.label() }}
+        {{ form.password1(class="form-control", placeholder="Şifre") }}
+
+        {{ form.password2.label() }}
+        {{ form.password2(class="form-control", placeholder="Şifreyi Tekrar Giriniz") }}
+        <br>
+        <div class="checkbox mb-3">
+               <h6>Hesabınız var mı?</h6>
+               <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Giriş</a>
+        </div>
+        {{ form.submit(class="btn btn-lg btn-block btn-primary", placeholder="Şifreyi Tekrar Giriniz") }}
+
+    </form>
+</div>
+</body>
+
+{% endblock %}
